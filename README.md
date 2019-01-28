@@ -44,7 +44,7 @@ var queryDef = new xtkQueryDef({ 'accLogin' : login });
 var soap =
   '<query operation="select" schema="nms:recipient">'+
     '<select><node expr="@id"/></select>'+
-    '<where><condition expr="@email=\'user@domain.com\'"/></where>'
+    '<where><condition expr="@email=\'user@domain.com\'"/></where>'+
   '</query>';
 var request = queryDef.ExecuteQuery(soap);
 request.then( (result) => {
