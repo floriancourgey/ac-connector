@@ -101,3 +101,44 @@ $ node index.js
   { attributes: { id: 'xxx' } },
   { attributes: { id: 'xxx' } } ]
 ```
+
+## Download all JSSP in folders
+```js
+const fs = require('fs-extra');
+var jxon = require('jxon');
+var ACC = require('ac-connector');
+var ACCLogManager = ACC.ACCLogManager;
+var xtkQueryDef = ACC.xtkQueryDef;
+var login = ACCLogManager.getLogin('');
+var queryDef = new xtkQueryDef({ 'accLogin' : login });
+
+var js = {
+  query: {
+    select: {
+      node: [
+        { '$expr': '@namespace' },
+        { '$expr': '@name' },
+        { '$expr': 'data' }
+      ]
+    },
+    '$operation': 'select',
+    '$schema': 'xtk:jssp'
+  }
+};
+
+var request = queryDef.ExecuteQuery(jxon.jsToString(js));
+request.then( (result) => {
+  var objects = result['jssp-collection']['jssp'];
+  console.log(objects.length+' JSSP found:');
+  for(var object of objects){
+    var name = object['attributes']['name'].replace(/[\:\/\\]/g, '_');
+    var namespace = object['attributes']['namespace'].replace(/[\:\/\\]/g, '_');
+    console.log(' - '+namespace+' '+name);
+    var path = "download/xtk_jssp/"+namespace+'/'+name;
+    var content = objects[0].data;
+    fs.outputFile(path, content, function (err) {
+      if(err) console.log(err); // => null
+    });
+  }
+}).catch( (e) => {console.log('Error ! ', e );});
+```
