@@ -26,9 +26,10 @@ The field `name` (Name) is the one to identify a connection (must be unique) and
 ## Using the library
 Load the library and the class needed
 ```js
-var ACC = require('ac-connector');
-var ACCLogManager = ACC.ACCLogManager;
-var xtkQueryDef = ACC.xtkQueryDef;
+> var ACC = require('ac-connector');
+> var ACCLogManager = ACC.ACCLogManager;
+> ACCLogManager.listConnections(); // list connections
+[ 'My Connection Name' ]
 ```
 
 Then you have to get your connection using `ACCLogManager` class
@@ -40,6 +41,7 @@ When you get your `ACCLogin` object, you can instanciate standard class, passing
 
 Create a `./index.js` file with the following:
 ```js
+var xtkQueryDef = ACC.xtkQueryDef;
 var queryDef = new xtkQueryDef({ 'accLogin' : login });
 var soap =
   '<query operation="select" schema="nms:recipient">'+
