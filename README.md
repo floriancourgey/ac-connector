@@ -23,7 +23,7 @@ Interface let you define basics and mandatory fields, like server url, user name
 
 The field `name` (Name) is the one to identify a connection (must be unique) and use the connection in your project.
 
-## Using the library
+## Installing the library
 Load the library and the class needed
 ```js
 > var ACC = require('ac-connector');
@@ -39,6 +39,7 @@ var login = ACCLogManager.getLogin('My Connection Name');
 
 When you get your `ACCLogin` object, you can instanciate standard class, passing an object with your login with 'accLogin' name. Every method return a Promise.
 
+## Using the library (with XML-String)
 Create a `./index.js` file with the following:
 ```js
 var xtkQueryDef = ACC.xtkQueryDef;
@@ -49,6 +50,37 @@ var soap =
     '<where><condition expr="@email=\'user@domain.com\'"/></where>'+
   '</query>';
 var request = queryDef.ExecuteQuery(soap);
+request.then( (result) => {
+  console.log('result:', result);
+  var recipients = result['recipient-collection']['recipient'];
+  console.log(recipients.length+' recipients found:', recipients);
+})
+.catch( (e) => {console.log('Error !', e );});
+```
+
+## Using the library (with JXON)
+Create a `./index.js` file with the following:
+```js
+var jxon = require('jxon');
+var xtkQueryDef = ACC.xtkQueryDef;
+var queryDef = new xtkQueryDef({ 'accLogin' : login });
+var js = {
+  query: {
+    select: {
+      node: [
+        { '$expr': '@namespace' },
+        { '$expr': '@name' },
+        { '$expr': 'data' }
+      ]
+    },
+    where: {
+      condition: { '$expr': '@namespace=\'acx\'' }
+    },
+    '$operation': 'select',
+    '$schema': 'xtk:jssp'
+  }
+};
+var request = queryDef.ExecuteQuery(jxon.jsToString(js));
 request.then( (result) => {
   console.log('result:', result);
   var recipients = result['recipient-collection']['recipient'];
