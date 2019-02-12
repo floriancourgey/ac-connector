@@ -1,6 +1,8 @@
 # ac-connector
 Adobe Campaign Classic Connector for NodeJS
 
+--> See [https://github.com/floriancourgey/ac-connector-client](github.com/floriancourgey/ac-connector-client) for usage :+1:
+
 This module provides some classes and multi environments management for Adobe Campaign (ex Neolane) in node JS
 
 ## Install
