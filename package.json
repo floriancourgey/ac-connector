@@ -1,6 +1,6 @@
 {
   "author": "Florian Courgey",
-  "name": "ac-connector",
+  "name": "ac-connector-fco",
   "version": "0.3.0",
   "description": "Adobe Campaign Classic Connector : tools to connect NodeJS to Adobe Campaign Classic",
   "main": "index.js",
