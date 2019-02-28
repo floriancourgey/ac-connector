@@ -1,7 +1,7 @@
 {
-  "author": "Cédric Rey",
+  "author": "Florian Courgey",
   "name": "ac-connector",
-  "version": "0.2.3",
+  "version": "0.3.0",
   "description": "Adobe Campaign Classic Connector : tools to connect NodeJS to Adobe Campaign Classic",
   "main": "index.js",
   "scripts": {
@@ -26,7 +26,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/cedricrey/ac-connector.git"
+    "url": "https://github.com/floriancourgey/ac-connector.git"
   },
   "bin": {
     "ACCManager": "./startUI.js"
