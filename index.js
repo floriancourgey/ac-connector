@@ -1,4 +1,4 @@
-//console.log('STart ACC');
+//console.log('Start ACC');
 exports.ACCLogManager = require('./ACCLogManager').ACCLogManager;
 exports.ACCLogin =  require('./ACCLogin').ACCLogin;
 exports.nmsDelivery =  require('./nmsDelivery').nmsDelivery;
